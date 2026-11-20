@@ -9,7 +9,7 @@ source.include_exts = py,png,jpg,kv,atlas,json
 
 version = 0.1
 
-requirements = python3,kivy==2.3.1,requests,beautifulsoup4,soupsieve,urllib3,chardet,charset-normalizer,idna,certifi,openssl,pyjnius,androidstorage4kivy
+requirements = python3,kivy==2.3.1,requests==2.32.3,beautifulsoup4,soupsieve,urllib3,chardet==5.2.0,idna,certifi,openssl,pyjnius,androidstorage4kivy
 
 orientation = portrait
 fullscreen = 0
