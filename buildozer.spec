@@ -9,14 +9,14 @@ source.include_exts = py,png,jpg,kv,atlas,json
 
 version = 0.1
 
-requirements = python3,kivy==2.3.0,requests,beautifulsoup4,soupsieve,urllib3,chardet,charset-normalizer,idna,certifi,openssl,pyjnius,androidstorage4kivy
+requirements = python3,kivy==2.3.1,requests,beautifulsoup4,soupsieve,urllib3,chardet,charset-normalizer,idna,certifi,openssl,pyjnius,androidstorage4kivy
 
 orientation = portrait
 fullscreen = 0
 
 android.permissions = INTERNET, READ_MEDIA_AUDIO, READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE
 
-android.api = 34
+android.api = 33
 android.minapi = 24
 android.ndk = 25b
 android.archs = arm64-v8a, armeabi-v7a
