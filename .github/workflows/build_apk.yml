@@ -1,6 +1,67 @@
-- name: Build Android APK
+name: Build Android APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Verify project files exist
+        run: |
+          if [ ! -f main.py ] || [ ! -f buildozer.spec ]; then
+            echo "ERROR: main.py and buildozer.spec must be in the repository root!"
+            ls -la
+            exit 1
+          fi
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential git zip unzip autoconf automake libtool \
+            libtool-bin libltdl-dev pkg-config zlib1g-dev libncurses-dev \
+            cmake libffi-dev libssl-dev libsqlite3-dev ccache patch \
+            gettext lbzip2 lld
+
+      - name: Install Buildozer and Cython
+        run: |
+          python -m pip install --upgrade pip "setuptools<71" wheel
+          pip install --upgrade buildozer cython==0.29.36
+
+      - name: Build Android APK
         run: |
           set -o pipefail
           echo "charset-normalizer==3.3.2" > "$PWD/pip-constraints.txt"
           export PIP_CONSTRAINT="$PWD/pip-constraints.txt"
           (yes || true) | buildozer -v android debug 2>&1 | tee build.log
+
+      - name: Show error from build log on failure
+        if: failure()
+        run: |
+          if [ -f build.log ]; then
+            grep -B 80 "Command failed:" build.log || tail -n 120 build.log
+          fi
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: zmus-player-apk
+          path: bin/*.apk
