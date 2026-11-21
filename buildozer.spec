@@ -1,8 +1,8 @@
 [app]
 
-title = Kulikov Sound
-package.name = kulikovsound
-package.domain = ua.kulikov
+title = ua.KulAl
+package.name = kulal
+package.domain = ua
 
 source.dir = .
 source.include_exts = py,png,jpg,kv,atlas,json
