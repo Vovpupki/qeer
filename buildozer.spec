@@ -2,7 +2,7 @@
 
 title = Kulikov Sound
 package.name = kulikovsound
-package.domain = ru.kulikov
+package.domain = ua.kulikov
 
 source.dir = .
 source.include_exts = py,png,jpg,kv,atlas,json
