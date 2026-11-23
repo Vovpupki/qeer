@@ -1,8 +1,8 @@
 [app]
 
-title = ua.KulAl
-package.name = kulal
-package.domain = ua
+title = ua KulAl
+package.name = player
+package.domain = ua.kulal
 
 source.dir = .
 source.include_exts = py,png,jpg,kv,atlas,json
